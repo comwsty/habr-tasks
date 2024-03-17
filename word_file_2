@@ -1,0 +1,25 @@
+public class word_file {
+    public static void main(String[] args) {
+        // Комната
+        double a = 5; // длина
+        double b = 4; // ширина
+        double h = 3; // высота
+
+        double w = 1.5; // ширина двери
+        double q = 2;   // высота двери
+
+        double s = 1;   // ширина окна
+        double p = 1;   // высота окна
+
+        // Площадь стен
+        double area = 2 * (a * h + b * h) - (w * q) - (s * p);
+
+        // Площадь, которую можно покрасить одной банкой краски
+        double k = 10;
+
+        // Количество банок краски
+        double num = area / k;
+
+        System.out.println("We need to buy " + num + " cans of paint.");
+    }
+}
