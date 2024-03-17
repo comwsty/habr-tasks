@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+public class Vector {
+    private double x;
+    private double y;
+    private double z;
+
+    public Vector(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public double length() {
+        return Math.sqrt(x * x + y * y + z * z);
+    }
+
+    public double scalarProduct(Vector vector) {
+        return x * vector.x + y * vector.y + z * vector.z;
+    }
+
+    public Vector vecProduct(Vector vector) {
+        return new Vector(
+                y * vector.z - z * vector.y,
+                z * vector.x - x * vector.z,
+                x * vector.y - y * vector.x);
+    }
+
+    public double cos(Vector vector) {
+        return scalarProduct(vector) / (length() * vector.length());
+    }
+
+    public Vector add(Vector vector) {
+        return new Vector(
+                x + vector.x,
+                y + vector.y,
+                z + vector.z
+        );
+    }
+
+    public Vector subtract(Vector vector) {
+        return new Vector(
+                x - vector.x,
+                y - vector.y,
+                z - vector.z
+        );
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ", " + z + ")";
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = 3;
+        Vector[] vectors = new Vector[n];
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter coordinates for vector " + (i + 1) + ":");
+            System.out.print("x: ");
+            double x = scanner.nextDouble();
+            System.out.print("y: ");
+            double y = scanner.nextDouble();
+            System.out.print("z: ");
+            double z = scanner.nextDouble();
+            vectors[i] = new Vector(x, y, z);
+        }
+        scanner.close();
+
+        System.out.println("Vector 1: " + vectors[0]);
+        System.out.println("Vector 2: " + vectors[1]);
+        System.out.println("Vector 3: " + vectors[2]);
+        System.out.println("Length of Vector 1: " + vectors[0].length());
+        System.out.println("Length of Vector 2: " + vectors[1].length());
+        System.out.println("Length of Vector 3: " + vectors[2].length());
+        System.out.println("Scalar product 1,2: " + vectors[0].scalarProduct(vectors[1]));
+        System.out.println("Scalar product 2,3: " + vectors[1].scalarProduct(vectors[2]));
+        System.out.println("The vector product 1,2" + vectors[0].vecProduct(vectors[1]));
+        System.out.println("The vector product 2,3" + vectors[1].vecProduct(vectors[2]));
+        System.out.println("Cos between vectors 1,2: " + vectors[0].cos(vectors[1]));
+        System.out.println("Cos between vectors 2,3: " + vectors[1].cos(vectors[2]));
+        System.out.println("The sum of vectors 1,2: " + vectors[0].add(vectors[1]));
+        System.out.println("The sum of vectors 2,3: " + vectors[1].add(vectors[2]));
+        System.out.println("The difference of vectors 1,2: " + vectors[0].subtract(vectors[1]));
+        System.out.println("The difference of vectors 2,3: " + vectors[1].subtract(vectors[2]));
+    }
+}
