@@ -1,0 +1,45 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class word_file2 {
+    public static void main(String[] args) {
+        try {
+            Scanner scanner = new Scanner(new File("src/input.txt"));
+            PrintWriter writer = new PrintWriter(new File("src/output.txt"));
+
+            int N = scanner.nextInt();
+            int[] tasks = new int[N];
+            for (int i = 0; i < N; i++) {
+                tasks[i] = scanner.nextInt();
+            }
+
+            int firstYear = solveFirstYear(N, tasks);
+            writer.println(firstYear);
+
+            scanner.close();
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int solveFirstYear(int N, int[] tasks) {
+        int[] penalties = new int[N];
+        for (int i = 0; i < N; i++) {
+            penalties[i] = tasks[i] * (i + 1) + 30 * (N - i - 1);
+        }
+
+        int minPenalty = Integer.MAX_VALUE;
+        int firstYear = -1;
+        for (int i = 0; i < N; i++) {
+            if (penalties[i] < minPenalty) {
+                minPenalty = penalties[i];
+                firstYear = i + 1;
+            }
+        }
+
+        return firstYear;
+    }
+}
