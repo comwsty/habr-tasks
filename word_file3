@@ -1,0 +1,49 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+class word_file3 {
+    public static double DiscountedPrice(double price, double discount) {
+        return price * (1 - discount / 100);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int L = scanner.nextInt();
+        int M = scanner.nextInt();
+        int N = scanner.nextInt();
+
+        double[][] fridges = new double[L][2];
+        double[][] microwaves = new double[M][2];
+        double[][] tv = new double[N][2];
+
+        for (int i = 0; i < L; i++) {
+            double price = scanner.nextDouble();
+            double discount = scanner.nextDouble();
+            fridges[i][0] = i + 1;
+            fridges[i][1] = DiscountedPrice(price, discount);
+        }
+
+        for (int i = 0; i < M; i++) {
+            double price = scanner.nextDouble();
+            double discount = scanner.nextDouble();
+            microwaves[i][0] = i + 1;
+            microwaves[i][1] = DiscountedPrice(price, discount);
+        }
+
+        for (int i = 0; i < N; i++) {
+            double price = scanner.nextDouble();
+            double discount = scanner.nextDouble();
+            tv[i][0] = i + 1;
+            tv[i][1] = DiscountedPrice(price, discount);
+        }
+
+        Arrays.sort(fridges, (a, b) -> Double.compare(a[1], b[1]));
+        Arrays.sort(microwaves, (a, b) -> Double.compare(a[1], b[1]));
+        Arrays.sort(tv, (a, b) -> Double.compare(a[1], b[1]));
+
+        System.out.println((int) fridges[L - 1][0] + " " + (int) microwaves[M - 1][0] + " " + (int) tv[N - 1][0]);
+
+        scanner.close();
+    }
+} 
